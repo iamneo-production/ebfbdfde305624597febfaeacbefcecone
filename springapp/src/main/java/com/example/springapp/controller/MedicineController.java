@@ -1,6 +1,6 @@
 package com.example.springapp;
 
-import com.yourpackage.model.Medicine;
+import .Medicine;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
