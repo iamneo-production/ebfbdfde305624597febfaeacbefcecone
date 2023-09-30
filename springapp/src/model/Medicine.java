@@ -1,4 +1,4 @@
-package com.yourpackage.model;
+package com.example.springapp;
 
 public class Medicine {
     private int medicineId;
