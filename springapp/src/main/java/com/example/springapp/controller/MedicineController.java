@@ -11,12 +11,12 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/medicines")
+@RequestMapping("/api/v1")
 public class MedicineController {
     private Map<Integer, Medicine> medicineStore = new HashMap<>();
     private int nextMedicineId = 1;
 
-    @PostMapping
+    @PostMapping("/medicines")
     public ResponseEntity<Boolean> addMedicine(@RequestBody Medicine medicine) {
         if (medicine != null) {
             medicine.setMedicineId(nextMedicineId++);
@@ -26,7 +26,7 @@ public class MedicineController {
         return new ResponseEntity<>(false, HttpStatus.BAD_REQUEST);
     }
 
-    @PutMapping("/{medicineId}")
+    @PutMapping("/medicines/{medicineId}")
     public ResponseEntity<Medicine> updateMedicine(@PathVariable int medicineId, @RequestBody Medicine updatedMedicine) {
         if (medicineStore.containsKey(medicineId) && updatedMedicine != null) {
             updatedMedicine.setMedicineId(medicineId);
@@ -34,11 +34,5 @@ public class MedicineController {
             return new ResponseEntity<>(updatedMedicine, HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    }
-
-    @GetMapping
-    public ResponseEntity<List<Medicine>> getAllMedicines() {
-        List<Medicine> medicines = new ArrayList<>(medicineStore.values());
-        return new ResponseEntity<>(medicines, HttpStatus.OK);
     }
 }
